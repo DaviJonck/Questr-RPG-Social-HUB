@@ -22,7 +22,7 @@ export function Header() {
                         <NavLink href='campaigns'>Campanhas</NavLink>
                     </NavLinkItem>
                     <NavLinkItem>
-                        <NavLink href='createCampaign'>Criar Campanha</NavLink>
+                        <NavLink href='create-campaign'>Criar Campanha</NavLink>
                     </NavLinkItem>
                     <NavLinkItem>
                         <NavLink href='#profile'>Faq</NavLink>

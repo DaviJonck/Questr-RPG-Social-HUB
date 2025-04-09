@@ -2,7 +2,7 @@
 
 import { useRouter } from 'next/navigation';
 
-import { campaigns } from '@/app/Mock/campaigns';
+import { campaigns } from '@/app/mock/campaigns';
 
 import { CampaignCard } from '../CampaignCard/CampaignCard';
 import { Actions, Button, Container, Grid, Header, SearchBox, Section } from './style';
