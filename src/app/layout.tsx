@@ -1,6 +1,7 @@
 import type { ReactNode } from 'react';
 
 import type { Metadata } from 'next';
+import { Cinzel } from 'next/font/google';
 import localFont from 'next/font/local';
 
 import { ThemeProvider } from 'next-themes';
@@ -14,10 +15,17 @@ const geistSans = localFont({
     variable: '--font-geist-sans',
     weight: '100 900'
 });
+
 const geistMono = localFont({
     src: './fonts/GeistMonoVF.woff',
     variable: '--font-geist-mono',
     weight: '100 900'
+});
+
+const cinzel = Cinzel({
+    subsets: ['latin'],
+    weight: ['400', '700'],
+    variable: '--font-cinzel'
 });
 
 export const metadata: Metadata = {
@@ -27,10 +35,8 @@ export const metadata: Metadata = {
 
 const Layout = ({ children }: Readonly<{ children: ReactNode }>) => {
     return (
-        // ? https://github.com/pacocoursey/next-themes?tab=readme-ov-file#with-app
-        // ? https://react.dev/reference/react-dom/client/hydrateRoot#suppressing-unavoidable-hydration-mismatch-errors
         <html suppressHydrationWarning lang='en'>
-            <body className={`${geistSans.variable} ${geistMono.variable}`}>
+            <body className={`${geistSans.variable} ${geistMono.variable} ${cinzel.variable}`}>
                 <ThemeProvider>{children}</ThemeProvider>
             </body>
         </html>
