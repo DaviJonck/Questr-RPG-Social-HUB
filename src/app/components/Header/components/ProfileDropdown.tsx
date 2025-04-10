@@ -2,6 +2,8 @@
 
 import React, { useState } from 'react';
 
+import { useRouter } from 'next/navigation';
+
 import { FaChevronDown, FaChevronUp, FaCrown, FaSignOutAlt, FaUser } from 'react-icons/fa';
 import { MdCampaign, MdCreateNewFolder } from 'react-icons/md';
 import styled, { css } from 'styled-components';
@@ -77,9 +79,14 @@ type Props = {
 };
 
 const ProfileDropdown = ({ userName }: Props) => {
+    const router = useRouter();
     const [open, setopen] = useState(false);
 
     const toggleDropdown = () => setopen(!open);
+
+    const handleGoProfile = () => {
+        router.push('/profile');
+    };
 
     return (
         <ProfileContainer>
@@ -89,7 +96,7 @@ const ProfileDropdown = ({ userName }: Props) => {
             </ProfileHeader>
             {open && (
                 <DropdownContent open={open}>
-                    <DropdownItem>
+                    <DropdownItem onClick={handleGoProfile}>
                         <FaUser />
                         Perfil
                     </DropdownItem>

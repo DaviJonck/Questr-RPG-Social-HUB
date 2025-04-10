@@ -19,7 +19,7 @@ export const colors = {
 export const Section = styled.section`
     padding: 4rem 0;
     position: relative;
-
+    background-color: #1e1e1e;
     &::before {
         content: '';
         position: absolute;

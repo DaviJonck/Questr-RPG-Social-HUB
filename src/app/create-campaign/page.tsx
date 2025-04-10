@@ -34,6 +34,7 @@ const steps = [
 ];
 
 const CreateCampaign = () => {
+    const [hasMounted, setHasMounted] = useState(false);
     const [currentStep, setCurrentStep] = useState(0);
     const [isLoading, setIsLoading] = useState(true);
 
@@ -49,14 +50,18 @@ const CreateCampaign = () => {
         // Lógica para manipular a submissão do formulário
     };
     useEffect(() => {
-        // Simula um tempo de carregamento
+        setHasMounted(true);
+
         const timer = setTimeout(() => {
             setIsLoading(false);
-        }, 2000); // Ajuste este valor conforme necessário
+        }, 2000);
 
         return () => clearTimeout(timer);
     }, []);
 
+    if (!hasMounted) {
+        return null;
+    }
     const nextStep = () => {
         setCurrentStep((prev) => Math.min(prev + 1, steps.length - 1));
     };
