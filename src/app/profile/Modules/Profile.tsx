@@ -1,20 +1,18 @@
 'use client';
 
-import Image from 'next/image';
-
 import Legolas from '@/app/images/Legolas.jpeg';
-import { UserInterface } from '@/app/interfaces/user';
+import { UserInterface } from '@/app/interfaces/User';
 import { Rating } from '@mui/material';
 
 import {
     Availability,
+    AvailabilityCard,
+    AvailabilityGrid,
     Avatar,
-    AvatarCard,
-    AvatarFrame,
-    AvatarImage,
-    AviablityCard,
+    AvatarWrapper,
+    Banner,
+    BannerWrapper,
     Bio,
-    Campaigns,
     Container,
     ProfileCard,
     Section,
@@ -23,17 +21,29 @@ import {
     UserInfo,
     UserType
 } from './style';
-import { BookOpen, Calendar, Clock, Globe, User } from 'lucide-react';
+import { User } from 'lucide-react';
+
+const schedule = [
+    { day: 'Segunda', time: '18h às 23h' },
+    { day: 'Terça', time: '19h às 22h' },
+    { day: 'Quarta', time: '20h às 23h' },
+    { day: 'Quinta', time: '20h às 23h' },
+    { day: 'Sexta', time: '20h às 23h' },
+    { day: 'Sabado', time: '20h às 23h' },
+    { day: 'Domingo', time: '20h às 23h' }
+];
 
 export default function UserProfileSection({ user }: { user: UserInterface }) {
     return (
         <Section>
             <Container>
                 <ProfileCard>
-                    <Avatar>
-                        <AvatarImage src={Legolas.src} alt='User Avatar' />
-                    </Avatar>
-
+                    <BannerWrapper>
+                        <Banner />
+                        <AvatarWrapper>
+                            <Avatar src={Legolas.src} alt='User Avatar' />
+                        </AvatarWrapper>
+                    </BannerWrapper>
                     <UserInfo>
                         <Title>{user.name}</Title>
                         <Rating readOnly defaultValue={user.stars} precision={0.5}></Rating>
@@ -54,30 +64,15 @@ export default function UserProfileSection({ user }: { user: UserInterface }) {
                     </UserInfo>
                     <Availability>
                         <h3>Disponibilidade</h3>
-                        <div>
-                            <Calendar size={16} style={{ color: '#ffd700', marginRight: '10px' }} />
-                            Terças e Quintas, 20h-23h
-                        </div>
-                        <div>
-                            <Globe size={16} style={{ color: '#ffd700', marginRight: '10px' }} />
-                            GMT-3 (Brasília)
-                        </div>
-                        <div>
-                            <Clock size={16} style={{ color: '#ffd700', marginRight: '10px' }} />
-                            Semanal
-                        </div>
+                        <AvailabilityGrid>
+                            {schedule.map(({ day, time }, index) => (
+                                <AvailabilityCard key={index}>
+                                    <strong>{day}</strong>
+                                    <span>{time}</span>
+                                </AvailabilityCard>
+                            ))}
+                        </AvailabilityGrid>
                     </Availability>
-                    <Campaigns>
-                        <h3>Campanhas Ativas</h3>
-                        <div>
-                            <BookOpen size={16} style={{ color: '#ffd700', marginRight: '10px' }} />
-                            As Crônicas de Eldoria (Jogador)
-                        </div>
-                        <div>
-                            <BookOpen size={16} style={{ color: '#ffd700', marginRight: '10px' }} />
-                            Sombras de Neverwinter (Mestre)
-                        </div>
-                    </Campaigns>
                 </ProfileCard>
             </Container>
         </Section>

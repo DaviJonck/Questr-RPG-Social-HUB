@@ -9,7 +9,9 @@ export const campaigns = [
         players: '3/5',
         style: ['Foco em Combate', 'Interpretação', 'Para Iniciantes'],
         description:
-            'Uma aventura clássica perfeita para novos jogadores. Explore a Costa da Espada e descubra segredos anões antigos.'
+            'Uma aventura clássica perfeita para novos jogadores. Explore a Costa da Espada e descubra segredos anões antigos.',
+        image: '',
+        role: 'Mestre'
     },
     {
         id: 2,
@@ -20,7 +22,9 @@ export const campaigns = [
         schedule: 'Quinzenal, Sextas às 20h',
         players: '2/4',
         style: ['Foco na História', 'Sombrio', 'Tecnologia em Destaque'],
-        description: 'Navegue pelas perigosas ruas da Cidade Noturna nesta campanha estilo noir.'
+        description: 'Navegue pelas perigosas ruas da Cidade Noturna nesta campanha estilo noir.',
+        image: '',
+        role: 'Mestre'
     },
     {
         id: 3,
@@ -32,6 +36,8 @@ export const campaigns = [
         players: '4/6',
         style: ['Terror', 'Interpretação', 'Foco nos Personagens'],
         description:
-            'Enfrente as brumas de Baróvia nesta campanha de horror gótico. Grande ênfase no desenvolvimento dos personagens.'
+            'Enfrente as brumas de Baróvia nesta campanha de horror gótico. Grande ênfase no desenvolvimento dos personagens.',
+        image: '',
+        role: 'Mestre'
     }
 ];
