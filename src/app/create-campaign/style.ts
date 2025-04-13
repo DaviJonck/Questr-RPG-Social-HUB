@@ -11,6 +11,7 @@ export const Title = styled.h1`
     margin-bottom: 30px;
     margin-top: 25px;
     color: #e6c200;
+    font-family: 'Cinzel', sans-serif;
 `;
 
 export const StepperContainer = styled.div`
@@ -96,7 +97,7 @@ export const TextP = styled.p.withConfig({
     shouldForwardProp: (prop) => prop !== 'isActive' // Não passa isActive para o DOM
 })<TextPProps>`
     text-align: center;
-    width: 100px;
+    width: 155px;
     font-family: 'Poppins', sans-serif;
     color: ${(props) => (props.isActive ? '#FFD700' : '#e0e0e0')};
 `;

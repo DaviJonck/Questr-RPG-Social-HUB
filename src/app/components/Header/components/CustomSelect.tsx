@@ -4,7 +4,7 @@ import { UseFormRegisterReturn } from 'react-hook-form';
 import styled from 'styled-components';
 
 // Estilos
-const SelectContainer = styled.div`
+export const SelectContainer = styled.div`
     display: flex;
     flex-direction: column;
     gap: 5px;
@@ -13,7 +13,7 @@ const SelectContainer = styled.div`
     width: 230px;
 `;
 
-const StyledLabel = styled.label`
+export const StyledLabel = styled.label`
     display: flex;
     align-items: center;
     gap: 4px;
@@ -22,11 +22,11 @@ const StyledLabel = styled.label`
     color: #a0a0a0;
 `;
 
-const Required = styled.p`
+export const Required = styled.p`
     color: #e6c200;
 `;
 
-const StyledSelect = styled.select`
+export const StyledSelect = styled.select`
     background-color: #3c3d3e;
     border: 1px solid #625a30;
     border-radius: 5px;
@@ -39,7 +39,7 @@ const StyledSelect = styled.select`
     }
 `;
 
-const ErrorMessage = styled.span`
+export const ErrorMessage = styled.span`
     color: #d64747;
     font-size: 14px;
     font-family: 'Inter', sans-serif;

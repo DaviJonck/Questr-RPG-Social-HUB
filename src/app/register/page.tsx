@@ -19,29 +19,47 @@ import {
     RightSide,
     SiteName,
     SubmitButton
-} from './style';
+} from '../login/style';
 import { Shield } from 'lucide-react';
 
-const LoginPage = () => {
+const RegisterPage = () => {
     const router = useRouter();
     const [email, setEmail] = useState('');
     const [password, setPassword] = useState('');
+    const [confirmPassword, setConfirmPassword] = useState('');
+    const [displayName, setDisplayName] = useState('');
     const [error, setError] = useState<string | null>(null);
     const [loading, setLoading] = useState(false);
 
-    const handleLogin = async (e: React.FormEvent) => {
+    const handleRegister = async (e: React.FormEvent) => {
         e.preventDefault();
         setLoading(true);
         setError(null);
 
-        const { error } = await supabase.auth.signInWithPassword({ email, password });
+        if (password !== confirmPassword) {
+            setError('As senhas não coincidem.');
+            setLoading(false);
 
-        if (error) {
-            setError(error.message);
-        } else {
-            router.push('/'); // Redireciona ao logar
+            return;
         }
 
+        const {
+            data: { user },
+            error: signUpError
+        } = await supabase.auth.signUp({
+            email,
+            password,
+            options: { data: { display_name: displayName } }
+        });
+
+        if (signUpError) {
+            setError(signUpError.message);
+            setLoading(false);
+
+            return;
+        }
+
+        router.push('/');
         setLoading(false);
     };
 
@@ -57,8 +75,17 @@ const LoginPage = () => {
             <Divider />
             <RightSide>
                 <FormContainer>
-                    <FormTitle>Login</FormTitle>
-                    <Form onSubmit={handleLogin}>
+                    <FormTitle>Registro</FormTitle>
+                    <Form onSubmit={handleRegister}>
+                        <Input
+                            type='text'
+                            placeholder='Usuário'
+                            value={displayName}
+                            onChange={(e: { target: { value: SetStateAction<string> } }) =>
+                                setDisplayName(e.target.value)
+                            }
+                            required
+                        />
                         <Input
                             type='email'
                             placeholder='Email'
@@ -73,9 +100,18 @@ const LoginPage = () => {
                             onChange={(e: { target: { value: SetStateAction<string> } }) => setPassword(e.target.value)}
                             required
                         />
+                        <Input
+                            type='password'
+                            placeholder='Confirmar Senha'
+                            value={confirmPassword}
+                            onChange={(e: { target: { value: SetStateAction<string> } }) =>
+                                setConfirmPassword(e.target.value)
+                            }
+                            required
+                        />
                         {error && <p style={{ color: 'red' }}>{error}</p>}
                         <SubmitButton type='submit' disabled={loading}>
-                            {loading ? 'Entrando...' : 'Entrar'}
+                            {loading ? 'Registrando...' : 'Registrar'}
                         </SubmitButton>
                     </Form>
                 </FormContainer>
@@ -84,4 +120,4 @@ const LoginPage = () => {
     );
 };
 
-export default LoginPage;
+export default RegisterPage;

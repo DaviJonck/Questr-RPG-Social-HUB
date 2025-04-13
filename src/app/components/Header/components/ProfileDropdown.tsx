@@ -4,17 +4,19 @@ import React, { useState } from 'react';
 
 import { useRouter } from 'next/navigation';
 
+import { supabase } from '@/app/lib/supabaseClient';
+
 import { FaChevronDown, FaChevronUp, FaCrown, FaSignOutAlt, FaUser } from 'react-icons/fa';
 import { MdCampaign, MdCreateNewFolder } from 'react-icons/md';
 import styled, { css } from 'styled-components';
 
-const ProfileContainer = styled.div`
+export const ProfileContainer = styled.div`
     position: relative;
     font-family: 'Cinzel Decorative', serif;
     font-size: 16px;
 `;
 
-const ProfileHeader = styled.div<{ open: boolean }>`
+export const ProfileHeader = styled.div<{ open: boolean }>`
     display: flex;
     align-items: center;
     justify-content: space-evenly;
@@ -30,13 +32,13 @@ const ProfileHeader = styled.div<{ open: boolean }>`
     border-bottom-right-radius: ${(props) => (props.open ? '0' : '5px')};
 `;
 
-const ProfileName = styled.span`
+export const ProfileName = styled.span`
     margin-right: 10px;
     font-weight: bold;
     text-transform: uppercase;
 `;
 
-const DropdownContent = styled.div<{ open: boolean }>`
+export const DropdownContent = styled.div<{ open: boolean }>`
     position: absolute;
     top: 100%;
     right: 0;
@@ -49,7 +51,7 @@ const DropdownContent = styled.div<{ open: boolean }>`
     border-top: none;
 `;
 
-const DropdownItem = styled.div<{ disabled?: boolean }>`
+export const DropdownItem = styled.div<{ disabled?: boolean }>`
     color: #ffd700;
     padding: 12px 16px;
     display: flex;
@@ -88,6 +90,16 @@ const ProfileDropdown = ({ userName }: Props) => {
         router.push('/profile');
     };
 
+    const handleGoCreateCampaign = () => {
+        router.push('/create-campaign');
+    };
+
+    const handleLogout = async () => {
+        console.log('Desconectando...');
+        await supabase.auth.signOut();
+        router.push('/login');
+    };
+
     return (
         <ProfileContainer>
             <ProfileHeader onClick={toggleDropdown} open={open}>
@@ -104,7 +116,7 @@ const ProfileDropdown = ({ userName }: Props) => {
                         <MdCampaign />
                         Minhas Campanhas
                     </DropdownItem>
-                    <DropdownItem>
+                    <DropdownItem onClick={handleGoCreateCampaign}>
                         <MdCreateNewFolder />
                         Criar Campanha
                     </DropdownItem>
@@ -112,7 +124,7 @@ const ProfileDropdown = ({ userName }: Props) => {
                         <FaCrown />
                         Planos VIP
                     </DropdownItem>
-                    <DropdownItem>
+                    <DropdownItem onClick={handleLogout}>
                         <FaSignOutAlt />
                         Sair
                     </DropdownItem>

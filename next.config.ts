@@ -13,3 +13,9 @@ const nextConfig: NextConfig = {
 };
 
 export default withBundleAnalyzer(nextConfig);
+
+module.exports = {
+    experimental: {
+        turbopack: false // Desabilita o Turbopack
+    }
+};
