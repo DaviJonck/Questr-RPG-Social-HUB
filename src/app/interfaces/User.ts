@@ -1,17 +1,20 @@
-export interface UserInterface {
-    id: number;
+interface UserInterface {
+    id: string;
     name: string;
-    email: string;
-    password?: string;
-    avatar?: string;
-    bio?: string;
+    username: string; // Novo campo
     stars: number;
-    type?: string;
+    bio: string;
+    tags: string[];
     availability: {
         days: string[];
         hours: string[];
     };
-    tags?: string[];
-    backgroundImage?: string;
-    activeCampaigns?: string[];
+    type: 'dm' | 'player';
+    email: string;
+    avatar_url?: string;
+    social_links?: {
+        twitter?: string;
+        discord?: string;
+        roll20?: string;
+    };
 }

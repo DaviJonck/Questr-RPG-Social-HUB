@@ -2,10 +2,11 @@
 
 import { useRouter } from 'next/navigation';
 
+import { mockCampaigns } from '../Mock/campaingsMock';
 import { CampaignCard } from '../components/CampaignCard/CampaignCard';
 import { Button } from '../components/CampaignList/style';
 import { Header } from '../components/Header/Header';
-import { mockCampaigns } from '../mock/campaingsMock';
+import { Footer } from '../home/modules/Footer/Footer';
 import { CampaignCardsContainer, CampaignSection, CampaignTitle } from './style';
 import { Filter, Plus } from 'lucide-react';
 
@@ -35,6 +36,7 @@ const Campaigns = () => {
                     <CampaignCard key={campaign.id} campaign={campaign} />
                 ))}
             </CampaignCardsContainer>
+            <Footer />
         </div>
     );
 };

@@ -6,6 +6,7 @@ import { zodResolver } from '@hookform/resolvers/zod';
 
 import { Header } from '../components/Header/Header';
 import Loading from '../components/Loading/Loading';
+import { Footer } from '../home/modules/Footer/Footer';
 import Step1 from './steps/Step1';
 import Step2 from './steps/Step2';
 import Step3 from './steps/Step3';
@@ -97,6 +98,7 @@ const CreateCampaign = () => {
                     </Form>
                 </FormProvider>
             </CampaignCard>
+            <Footer />
             {isLoading && <Loading />}
         </div>
     );

@@ -51,6 +51,9 @@ export function Header() {
                         <NavLink href='/campaigns'>Campanhas</NavLink>
                     </NavLinkItem>
                     <NavLinkItem>
+                        <NavLink href='/plans'>VIP</NavLink>
+                    </NavLinkItem>
+                    <NavLinkItem>
                         <NavLink href='/create-campaign'>Criar Campanha</NavLink>
                     </NavLinkItem>
                     <NavLinkItem>

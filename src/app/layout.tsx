@@ -57,7 +57,9 @@ const Layout = ({ children }: Readonly<{ children: ReactNode }>) => {
                 }
             }}>
             <html suppressHydrationWarning lang='en'>
-                <body className={`${geistSans.variable} ${geistMono.variable} ${cinzel.variable} ${poppins.variable}`}>
+                <body
+                    style={{ backgroundColor: '#2a2a2a' }}
+                    className={`${geistSans.variable} ${geistMono.variable} ${cinzel.variable} ${poppins.variable}`}>
                     <Providers>{children}</Providers>
                 </body>
             </html>

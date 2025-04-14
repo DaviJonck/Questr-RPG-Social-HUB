@@ -5,6 +5,7 @@ const FooterWrapper = styled.footer`
     color: #ccc;
     padding: 40px 20px;
     border-top: 2px solid #333;
+    margin-top: 3rem;
 `;
 
 const FooterGrid = styled.div`
@@ -28,6 +29,7 @@ const Column = styled.div`
 `;
 
 const Title = styled.h4`
+    font-family: 'Cinzel', serif;
     color: #ffd700;
     margin-bottom: 12px;
     font-size: 1.1rem;
@@ -36,6 +38,7 @@ const Title = styled.h4`
 const LinkList = styled.ul`
     list-style: none;
     padding: 0;
+    font-family: 'Poppins', serif;
 
     li {
         margin-bottom: 8px;
