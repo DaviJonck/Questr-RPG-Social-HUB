@@ -2,27 +2,14 @@
 
 import { useEffect, useState } from 'react';
 
+import { createServerComponentClient } from '@supabase/auth-helpers-nextjs';
+
 import { Header, User } from '../components/Header/Header';
-import { supabase } from '../lib/supabaseClient';
 import UserProfileSection from './Modules/Profile';
 
 export default function ProfilePage() {
     const [user, setUser] = useState<User | null>(null);
     const [loading, setLoading] = useState(true);
-
-    useEffect(() => {
-        const fetchUser = async () => {
-            const { data, error } = await supabase.auth.getUser();
-            if (data?.user) {
-                setUser(data.user);
-            }
-            setLoading(false);
-        };
-
-        fetchUser();
-    }, []);
-
-    if (loading) return <div>Loading...</div>;
 
     return (
         <>

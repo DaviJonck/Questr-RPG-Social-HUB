@@ -5,6 +5,9 @@ import { Cinzel, Poppins } from 'next/font/google';
 import localFont from 'next/font/local';
 
 import '@/app/globals.css';
+import { ptBR } from '@clerk/localizations';
+import { ClerkProvider, SignInButton, SignUpButton, SignedIn, SignedOut, UserButton } from '@clerk/nextjs';
+import { dark, neobrutalism, shadesOfPurple } from '@clerk/themes';
 
 import './globals.css';
 import { Providers } from './provider/Provider';
@@ -40,11 +43,25 @@ export const metadata: Metadata = {
 
 const Layout = ({ children }: Readonly<{ children: ReactNode }>) => {
     return (
-        <html suppressHydrationWarning lang='en'>
-            <body className={`${geistSans.variable} ${geistMono.variable} ${cinzel.variable} ${poppins.variable}`}>
-                <Providers>{children}</Providers>
-            </body>
-        </html>
+        <ClerkProvider
+            signInUrl='/login'
+            signUpUrl='/register'
+            localization={ptBR}
+            appearance={{
+                baseTheme: [dark],
+                signIn: {
+                    variables: { colorPrimary: '#ffd700' }
+                },
+                signUp: {
+                    variables: { colorPrimary: '#ffd700' }
+                }
+            }}>
+            <html suppressHydrationWarning lang='en'>
+                <body className={`${geistSans.variable} ${geistMono.variable} ${cinzel.variable} ${poppins.variable}`}>
+                    <Providers>{children}</Providers>
+                </body>
+            </html>
+        </ClerkProvider>
     );
 };
 

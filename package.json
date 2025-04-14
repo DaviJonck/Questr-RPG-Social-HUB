@@ -13,12 +13,16 @@
         "format": "prettier --write \"src/**/*.{js,jsx,ts,tsx}\""
     },
     "dependencies": {
+        "@clerk/localizations": "^3.13.9",
+        "@clerk/nextjs": "^6.14.3",
+        "@clerk/themes": "^2.2.31",
         "@emotion/react": "^11.14.0",
         "@emotion/styled": "^11.14.0",
         "@hookform/resolvers": "^5.0.1",
         "@mui/material": "^7.0.1",
         "@supabase/auth-helpers-nextjs": "^0.10.0",
         "@supabase/auth-js": "^2.69.1",
+        "@supabase/ssr": "^0.6.1",
         "@supabase/supabase-js": "^2.49.4",
         "lucide-react": "^0.487.0",
         "next": "^15.2.4",

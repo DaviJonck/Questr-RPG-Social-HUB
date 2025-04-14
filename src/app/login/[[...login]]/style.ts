@@ -41,6 +41,9 @@ const RightSide = styled.div`
 `;
 
 const FormContainer = styled.div`
+    display: flex;
+    flex-direction: column;
+    font-family: 'Poppins', serif;
     width: 80%;
     max-width: 400px;
 `;
