@@ -14,34 +14,34 @@ const VIPPlansPage = () => {
             <PlansContainer>
                 <PageHeader>
                     <Crown size={48} />
-                    <h1>Planos VIP</h1>
-                    <p>Desbloqueie recursos exclusivos e melhore sua experiência na Taverna</p>
+                    <h1>APOIE A TAVERNA</h1>
+                    <p>Sua contribuição mantém a taverna aberta para todos os aventureiros</p>
                 </PageHeader>
 
                 <PlansGrid>
                     {/* Plano Básico */}
                     <PlanCard>
                         <PlanHeader>
-                            <h2>Jogador</h2>
-                            <Price>Grátis</Price>
+                            <h2>Aventureiro</h2>
+                            <Price>R$10,00</Price>
                         </PlanHeader>
                         <PlanFeatures>
-                            <Feature $valid='true'>
+                            <Feature $valid={true}>
                                 <Check size={16} /> Criação de perfil básico
                             </Feature>
-                            <Feature $valid='true'>
+                            <Feature $valid={true}>
                                 <Check size={16} /> Acesso a mesas públicas
                             </Feature>
-                            <Feature $valid='true'>
+                            <Feature $valid={true}>
                                 <Check size={16} /> 3 tags de interesse
                             </Feature>
-                            <Feature $valid='false'>
+                            <Feature $valid={false}>
                                 <X size={16} /> Badge exclusiva
                             </Feature>
-                            <Feature $valid='false'>
+                            <Feature $valid={false}>
                                 <X size={16} /> Mesas VIP
                             </Feature>
-                            <Feature $valid='false'>
+                            <Feature $valid={false}>
                                 <X size={16} /> Recursos avançados
                             </Feature>
                         </PlanFeatures>
@@ -49,7 +49,7 @@ const VIPPlansPage = () => {
                     </PlanCard>
 
                     {/* Plano Intermediário */}
-                    <PlanCard $highlighted='true'>
+                    <PlanCard $highlighted={true}>
                         <Ribbon>Popular</Ribbon>
                         <PlanHeader>
                             <h2>Mestre</h2>
@@ -58,26 +58,26 @@ const VIPPlansPage = () => {
                             </Price>
                         </PlanHeader>
                         <PlanFeatures>
-                            <Feature $valid='true'>
+                            <Feature $valid={true}>
                                 <Check size={16} /> Todos os recursos do Jogador
                             </Feature>
-                            <Feature $valid='true'>
+                            <Feature $valid={true}>
                                 <Check size={16} /> Badge de Mestre VIP
                             </Feature>
-                            <Feature $valid='true'>
+                            <Feature $valid={true}>
                                 <Check size={16} /> Até 10 tags de interesse
                             </Feature>
-                            <Feature $valid='true'>
+                            <Feature $valid={true}>
                                 <Check size={16} /> Crie mesas VIP
                             </Feature>
-                            <Feature $valid='true'>
+                            <Feature $valid={true}>
                                 <Check size={16} /> Ferramentas de mestre
                             </Feature>
-                            <Feature $valid='false'>
+                            <Feature $valid={false}>
                                 <X size={16} /> Suporte prioritário
                             </Feature>
                         </PlanFeatures>
-                        <PlanButton $highlighted='true'>Assinar</PlanButton>
+                        <PlanButton $highlighted={true}>Assinar</PlanButton>
                     </PlanCard>
 
                     {/* Plano Premium */}
@@ -89,22 +89,22 @@ const VIPPlansPage = () => {
                             </Price>
                         </PlanHeader>
                         <PlanFeatures>
-                            <Feature $valid='true'>
+                            <Feature $valid={true}>
                                 <Check size={16} /> Todos os recursos do Mestre
                             </Feature>
-                            <Feature $valid='true'>
+                            <Feature $valid={true}>
                                 <Check size={16} /> Badge exclusiva dourada
                             </Feature>
-                            <Feature $valid='true'>
+                            <Feature $valid={true}>
                                 <Check size={16} /> Tags ilimitadas
                             </Feature>
-                            <Feature $valid='true'>
+                            <Feature $valid={true}>
                                 <Check size={16} /> Suporte prioritário 24/7
                             </Feature>
-                            <Feature $valid='true'>
+                            <Feature $valid={true}>
                                 <Check size={16} /> Acesso antecipado a recursos
                             </Feature>
-                            <Feature $valid='true'>
+                            <Feature $valid={true}>
                                 <Check size={16} /> Sala privada para campanhas
                             </Feature>
                         </PlanFeatures>
@@ -166,7 +166,7 @@ const VIPPlansPage = () => {
                                 <Coins size={16} /> Permita o desenvolvimento de novas ferramentas
                             </li>
                             <li>
-                                <Users size={16} /> Sustente uma equipe dedicada a melhorar sua experiência
+                                <Users size={16} /> Ajude uma pequena e apaixonada equipe a melhorar sua experiência
                             </li>
                         </ul>
                         <p>Junte-se aos nossos apoiadores VIP e faça parte dessa jornada épica!</p>
@@ -287,14 +287,21 @@ const PlansGrid = styled.div`
         gap: 1.5rem;
     }
 `;
+interface PlanCardProps {
+    $highlighted?: boolean;
+}
 
-const PlanCard = styled.div<{ $highlighted?: string }>`
+interface FeatureProps {
+    $valid?: boolean;
+}
+
+const PlanCard = styled.div<PlanCardProps>`
     background: #2a2a2a;
     border-radius: 8px;
     padding: 2rem;
     position: relative;
-    border: 1px solid ${({ $highlighted }) => ($highlighted === 'true' ? '#ffd700' : 'rgba(255, 215, 0, 0.3)')};
-    box-shadow: ${({ $highlighted }) => ($highlighted === 'true' ? '0 0 20px rgba(255, 215, 0, 0.2)' : 'none')};
+    border: 1px solid ${({ $highlighted }) => ($highlighted ? '#ffd700' : 'rgba(255, 215, 0, 0.3)')};
+    box-shadow: ${({ $highlighted }) => ($highlighted ? '0 0 20px rgba(255, 215, 0, 0.2)' : 'none')};
     transition: all 0.3s ease;
 
     &:hover {
@@ -350,7 +357,7 @@ const PlanFeatures = styled.ul`
     margin: 0 0 2rem;
 `;
 
-const Feature = styled.li<{ $valid?: string }>`
+const Feature = styled.li<FeatureProps>`
     display: flex;
     align-items: center;
     gap: 0.75rem;
@@ -363,18 +370,18 @@ const Feature = styled.li<{ $valid?: string }>`
     }
 
     svg {
-        color: ${({ $valid }) => ($valid === 'true' ? '#4CAF50' : '#F44336')};
+        color: ${({ $valid }) => ($valid ? '#4CAF50' : '#F44336')};
         flex-shrink: 0;
     }
 `;
 
-const PlanButton = styled.button<{ $highlighted?: string }>`
+const PlanButton = styled.button<{ $highlighted?: boolean }>`
     width: 100%;
     padding: 1rem;
     border: none;
     border-radius: 4px;
-    background: ${({ $highlighted }) => ($highlighted === 'true' ? '#ffd700' : 'rgba(255, 215, 0, 0.1)')};
-    color: ${({ $highlighted }) => ($highlighted === 'true' ? '#2a2a2a' : '#ffd700')};
+    background: ${({ $highlighted }) => ($highlighted ? '#ffd700' : 'rgba(255, 215, 0, 0.1)')};
+    color: ${({ $highlighted }) => ($highlighted ? '#2a2a2a' : '#ffd700')};
     font-weight: bold;
     cursor: pointer;
     transition: all 0.3s ease;
@@ -384,7 +391,7 @@ const PlanButton = styled.button<{ $highlighted?: string }>`
     letter-spacing: 1px;
 
     &:hover {
-        background: ${({ $highlighted }) => ($highlighted === 'true' ? '#e6c200' : 'rgba(255, 215, 0, 0.2)')};
+        background: ${({ $highlighted }) => ($highlighted ? '#e6c200' : 'rgba(255, 215, 0, 0.2)')};
         transform: translateY(-2px);
     }
 

@@ -1,4 +1,4 @@
-import styled from 'styled-components';
+import styled, { keyframes } from 'styled-components';
 
 export const Section = styled.section`
     padding: 2rem 0;
@@ -87,6 +87,33 @@ export const EditButton = styled.button`
     }
 `;
 
+// Animação para os ícones flutuantes
+const floatAnimation = keyframes`
+    0% {
+        transform: translateY(0) rotate(0deg);
+    }
+    50% {
+        transform: translateY(-20px) rotate(10deg);
+    }
+    100% {
+        transform: translateY(0) rotate(0deg);
+    }
+`;
+
+export const FloatingIcon = styled.div`
+    position: absolute;
+    color: rgba(255, 215, 0, 0.4);
+    user-select: none;
+    pointer-events: none;
+    animation: ${floatAnimation} 8s ease-in-out infinite;
+    z-index: 0;
+
+    &:hover {
+        color: rgba(255, 215, 0, 0.7);
+    }
+`;
+
+// ... (mantenha todos os outros estilos existentes) ...
 export const UserInfo = styled.div`
     padding: 4rem 2rem 2rem;
     border-bottom: 1px solid rgba(255, 215, 0, 0.2);

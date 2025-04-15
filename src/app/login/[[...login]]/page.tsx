@@ -5,6 +5,8 @@ import { SetStateAction, useState } from 'react';
 import { useRouter } from 'next/navigation';
 
 import { Logo } from '@/app/components/Header/styles';
+import Loading from '@/app/components/Loading/Loading';
+import { LoadingSpinner } from '@/app/components/Loading/style';
 import { SignIn, useSignIn } from '@clerk/nextjs';
 
 import {
@@ -56,6 +58,9 @@ const LoginPage = () => {
 
         setLoading(false);
     };
+    if (!isLoaded) {
+        return <Loading />;
+    }
 
     return (
         <LoginContainer>

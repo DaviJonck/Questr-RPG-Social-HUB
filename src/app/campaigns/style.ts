@@ -1,49 +1,53 @@
 import styled from 'styled-components';
 
-export const CampaignSection = styled.div`
-    display: flex;
-    flex-direction: row;
-    align-items: center;
-    justify-content: flex-start;
-    background-color: #2a2a2a;
-    gap: 1rem;
+export const FeaturedSection = styled.section`
+    background: linear-gradient(135deg, #1a1a1a 0%, #2a2a2a 100%);
+    padding: 3rem 2rem;
+    border-bottom: 2px solid #ffd70033;
 `;
-export const CampaignTitle = styled.h1`
+
+export const MainSection = styled.section`
+    padding: 2rem;
+    background-color: #1a1a1a;
+`;
+
+export const SectionHeader = styled.div`
+    max-width: 1200px;
+    margin: 0 auto 2rem;
+`;
+
+export const SectionTitle = styled.h2`
     color: #ffd700;
-    font-size: 48px;
+    font-size: 2rem;
     font-family: 'Cinzel', serif;
-    font-weight: 500;
-    margin: 20px 60px;
+    display: flex;
+    align-items: center;
+    margin-bottom: 0.5rem;
 `;
 
-export const CampaignCardsContainer = styled.div`
+export const FilterControls = styled.div`
+    display: flex;
+    gap: 1rem;
+    margin-top: 1.5rem;
+`;
+
+export const CampaignCardsContainer = styled.div<{ highlight?: boolean }>`
     display: grid;
-    grid-template-columns: repeat(4, 1fr); /* 4 por linha */
-    gap: 1.5rem;
-    padding: 1rem;
+    grid-template-columns: repeat(auto-fill, minmax(${(props) => (props.highlight ? '350px' : '280px')}, 1fr));
+    gap: 2rem;
+    max-width: 1200px;
+    margin: 0 auto;
 
-    /* Os dois primeiros cards ocupam 2 colunas */
-    & > div:nth-child(1),
-    & > div:nth-child(2) {
-        grid-column: span 2;
-    }
-
-    /* Responsivo para telas menores */
-    @media (max-width: 1024px) {
-        grid-template-columns: repeat(2, 1fr);
-
-        & > div:nth-child(1),
-        & > div:nth-child(2) {
-            grid-column: span 2;
+    ${(props) =>
+        props.highlight &&
+        `
+        & > div {
+            border: 2px solid #ffd700;
+            box-shadow: 0 0 20px rgba(255, 215, 0, 0.3);
         }
-    }
+    `}
 
-    @media (max-width: 600px) {
+    @media (max-width: 768px) {
         grid-template-columns: 1fr;
-
-        & > div:nth-child(1),
-        & > div:nth-child(2) {
-            grid-column: span 1;
-        }
     }
 `;

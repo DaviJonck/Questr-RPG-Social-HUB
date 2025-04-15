@@ -1,134 +1,248 @@
 import styled from 'styled-components';
 
-export interface StepProps {
-    isActive: boolean;
-}
-export interface TextPProps {
-    isActive: boolean;
-}
-export const Title = styled.h1`
-    text-align: center;
-    margin-bottom: 30px;
-    margin-top: 25px;
-    color: #e6c200;
-    font-family: 'Cinzel', sans-serif;
-`;
-
-export const StepperContainer = styled.div`
-    display: flex;
-    justify-content: center;
-    margin-bottom: 30px;
-    gap: 20px;
-`;
-
-export const Step = styled.div.withConfig({
-    shouldForwardProp: (prop) => prop !== 'isActive'
-})<StepProps>`
-    width: 60px;
-    height: 60px;
-    border: 1px solid #665b1e;
-    font-size: 20px;
-    font-family: 'Cinzel', sans-serif;
-    border-radius: 50%;
-    background-color: ${(props) => (props.isActive ? '#403C26' : '#2A2A2A')};
-    color: #e6c200;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    margin: 0 10px;
-`;
-
-export const StepConnector = styled.div`
-    width: 50px;
-    height: 2px;
-    background-color: #665b1e;
-    align-self: center;
-`;
-
-export const Form = styled.form`
-    display: flex;
-    flex-direction: column;
-    margin: 0 auto;
-`;
-
-export const FormGroup = styled.div`
-    margin-bottom: 20px;
-`;
-
-export const Label = styled.label`
-    display: block;
-    color: #a0a0a0;
-    margin-bottom: 5px;
-`;
-
-export const Input = styled.input`
-    width: 100%;
-    padding: 8px;
-    background-color: #3c3d3e;
-    border: 1px solid #625a30;
-    border-radius: 5px;
-    color: #a0a0a0;
-`;
-
-export const TextArea = styled.textarea`
-    width: 100%;
-    padding: 8px;
-    background-color: #3c3d3e;
-    border: 1px solid #625a30;
-    border-radius: 5px;
-    color: #e6c200;
-`;
-
-export const ButtonContainer = styled.div`
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    gap: 30px;
-    margin-top: 60px;
-`;
-
-export const StepContainer = styled.div`
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-`;
-
-export const TextP = styled.p.withConfig({
-    shouldForwardProp: (prop) => prop !== 'isActive' // Não passa isActive para o DOM
-})<TextPProps>`
-    text-align: center;
-    width: 155px;
-    font-family: 'Poppins', sans-serif;
-    color: ${(props) => (props.isActive ? '#FFD700' : '#e0e0e0')};
-`;
-export interface ButtonProps {
-    primary?: boolean;
-}
 export const CampaignCard = styled.div`
     position: relative;
-    margin: 0 auto;
-    background-color: rgba(37, 37, 37, 0.95);
-    box-shadow: 0px 4px 16px rgb(19, 19, 19);
-    height: 80vh;
-    border-radius: 8px;
-    width: 50%;
+    margin: 2rem auto;
+    background: #2a2a2a;
+    min-height: 70vh;
+    border-radius: 16px;
+    border: 1px solid rgba(255, 215, 0, 0.15);
+    width: 85%;
+    max-width: 900px;
     padding: 40px;
-    margin-top: 15px;
+    margin-top: 30px;
+    box-shadow: 0 10px 40px rgba(0, 0, 0, 0.5);
     overflow: hidden;
+    z-index: 1;
 
     &::before {
         content: '';
         position: absolute;
         top: 0;
         left: 0;
+        right: 0;
         height: 4px;
-        width: 100%;
-        background: linear-gradient(90deg, #ffd700, transparent);
-        border-top-left-radius: 8px;
-        border-top-right-radius: 8px;
+        background: linear-gradient(90deg, #ffd700, #e6c200);
+        background-size: 200% 100%;
+        animation: gradient 3s ease infinite;
+    }
+
+    @keyframes gradient {
+        0% {
+            background-position: 0% 50%;
+        }
+        50% {
+            background-position: 100% 50%;
+        }
+        100% {
+            background-position: 0% 50%;
+        }
     }
 `;
 
+export const ContentWrapper = styled.div`
+    max-width: 1300px;
+    margin: 0 auto;
+    padding: 2rem;
+    position: relative;
+    z-index: 1;
+`;
+
+export const DecorationLeft = styled.div`
+    position: absolute;
+    top: 50px;
+    left: 30px;
+    width: 100px;
+    height: 100px;
+    background: url('/a') no-repeat;
+    background-size: contain;
+    opacity: 0.1;
+    z-index: -1;
+`;
+
+export const DecorationRight = styled.div`
+    position: absolute;
+    bottom: 50px;
+    right: 30px;
+    width: 100px;
+    height: 100px;
+    background: url('/images/hero_dmgscreen_0.jpg') no-repeat;
+    background-size: contain;
+    opacity: 0.1;
+    z-index: -1;
+`;
+
+export const CampaignHeader = styled.div`
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 20px;
+    margin-bottom: 30px;
+
+    svg {
+        color: #ffd700;
+        opacity: 0.7;
+    }
+`;
+
+export const CampaignContent = styled.div`
+    padding: 20px 0;
+`;
+
+export const FormHeader = styled.div`
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    margin-bottom: 30px;
+    padding-bottom: 15px;
+    border-bottom: 1px solid rgba(255, 215, 0, 0.2);
+
+    h3 {
+        color: #ffd700;
+        font-family: 'Cinzel', serif;
+        font-size: 1.4rem;
+        margin: 0;
+    }
+
+    svg {
+        color: #ffd700;
+    }
+`;
+
+export const FormFooter = styled.div`
+    display: flex;
+    justify-content: space-between;
+    margin-top: 40px;
+    padding-top: 20px;
+    border-top: 1px solid rgba(255, 215, 0, 0.1);
+
+    button {
+        display: flex;
+        align-items: center;
+        gap: 8px;
+        padding: 12px 24px;
+        border-radius: 6px;
+        font-family: 'Poppins', sans-serif;
+        font-weight: 500;
+        cursor: pointer;
+        transition: all 0.3s ease;
+
+        &.primary {
+            background: #ffd700;
+            color: #2a2a2a;
+            border: none;
+
+            &:hover {
+                background: #e6c200;
+                transform: translateY(-2px);
+            }
+        }
+
+        &.secondary {
+            background: transparent;
+            color: #ffd700;
+            border: 1px solid #ffd700;
+
+            &:hover {
+                background: rgba(255, 215, 0, 0.1);
+                transform: translateY(-2px);
+            }
+        }
+
+        &:disabled {
+            opacity: 0.5;
+            cursor: not-allowed;
+            transform: none !important;
+        }
+    }
+`;
+
+export const Title = styled.h1`
+    text-align: center;
+    margin: 0;
+    color: #ffd700;
+    font-family: 'Cinzel', serif;
+    font-size: 2.4rem;
+    letter-spacing: 1px;
+    text-shadow: 0 2px 4px rgba(0, 0, 0, 0.3);
+`;
+
+export const StepperContainer = styled.div`
+    position: relative;
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: 40px;
+    padding: 0 20px;
+`;
+
+export const StepContainer = styled.div`
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    position: relative;
+    z-index: 2;
+    flex: 1;
+`;
+
+export const Step = styled.div<{ $isActive: boolean; $completed: boolean }>`
+    width: 36px;
+    height: 36px;
+    border: 2px solid ${({ $isActive, $completed }) => ($completed ? '#4CAF50' : $isActive ? '#ffd700' : '#665b1e')};
+    font-size: 16px;
+    font-weight: bold;
+    border-radius: 50%;
+    background-color: ${({ $isActive, $completed }) =>
+        $completed ? 'rgba(76, 175, 80, 0.2)' : $isActive ? '#403C26' : '#2A2A2A'};
+    color: ${({ $isActive, $completed }) => ($completed ? '#4CAF50' : $isActive ? '#ffd700' : '#665b1e')};
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: all 0.3s ease;
+`;
+
+export const StepIcon = styled.div<{ $isActive: boolean }>`
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin-top: 10px;
+
+    svg {
+        color: ${({ $isActive }) => ($isActive ? '#ffd700' : '#665b1e')};
+        margin-bottom: 5px;
+        transition: all 0.3s ease;
+    }
+`;
+
+export const StepConnector = styled.div<{ $isActive: boolean }>`
+    position: absolute;
+    top: 18px;
+    left: calc(50% + 18px);
+    right: calc(-50% + 18px);
+    height: 2px;
+    background: ${({ $isActive }) => ($isActive ? 'rgba(255, 215, 0, 0.5)' : 'rgba(102, 91, 30, 0.3)')};
+    transition: all 0.3s ease;
+`;
+
+export const TextP = styled.p<{ $isActive: boolean }>`
+    text-align: center;
+    width: 100%;
+    font-family: '', sans-serif;
+    font-size: 0.9rem;
+    color: ${({ $isActive }) => ($isActive ? '#FFD700' : '#a0a0a0')};
+    margin: 0;
+    transition: all 0.3s ease;
+`;
+
+export const Form = styled.form`
+    display: flex;
+    flex-direction: column;
+    margin: 0 auto;
+    max-width: 750px;
+    gap: 20px;
+`;
+export interface ButtonProps {
+    primary?: boolean;
+}
 export const Button = styled.button.withConfig({
     shouldForwardProp: (prop) => prop !== 'primary'
 })<ButtonProps>`
@@ -145,4 +259,11 @@ export const Button = styled.button.withConfig({
         opacity: 0.5;
         cursor: not-allowed;
     }
+`;
+export const ButtonContainer = styled.div`
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 30px;
+    margin-top: 60px;
 `;

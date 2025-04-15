@@ -329,7 +329,7 @@ export function EditProfile({ user, onSave, onClose }: EditProfileProps) {
                                                 value={time.from}
                                                 onChange={(e) => handleTimeChange(day, 'from', e.target.value)}
                                             />
-                                            <TimeSeparator>às</TimeSeparator>
+                                            <TimeSeparator>até</TimeSeparator>
                                             <TimeInput
                                                 type='time'
                                                 value={time.to}
@@ -510,11 +510,24 @@ const TimeRangeContainer = styled.div`
 
 const TimeInput = styled.input`
     background-color: #1a1a1a;
-    border: 1px solid #ffd700;
     border-radius: 4px;
     padding: 0.5rem;
     color: #e0e0e0;
     font-family: 'Poppins', sans-serif;
+    border: none;
+
+    /* Estilizando o ícone do relógio */
+    &::-webkit-calendar-picker-indicator {
+        filter: invert(1); /* Inverte as cores para branco */
+        opacity: 0.8;
+        cursor: pointer;
+    }
+
+    &:focus {
+        outline: none;
+        border-color: #e6c200;
+        box-shadow: 0 0 0 2px rgba(255, 215, 0, 0.2);
+    }
 `;
 const ChangeAvatarButton = styled.button<{ disabled?: boolean }>`
     background-color: rgba(255, 215, 0, 0.1);
@@ -532,6 +545,7 @@ const ChangeAvatarButton = styled.button<{ disabled?: boolean }>`
     }
 `;
 const TimeSeparator = styled.span`
-    color: #ffd700;
+    font-family: 'Cinzel', serif;
+    color: white;
     font-size: 0.9rem;
 `;

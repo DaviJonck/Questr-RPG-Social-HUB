@@ -5,7 +5,6 @@ const FooterWrapper = styled.footer`
     color: #ccc;
     padding: 40px 20px;
     border-top: 2px solid #333;
-    margin-top: 3rem;
 `;
 
 const FooterGrid = styled.div`
