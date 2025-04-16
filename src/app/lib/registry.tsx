@@ -1,15 +1,14 @@
 'use client';
 
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 
 import { useServerInsertedHTML } from 'next/navigation';
 
 import { ServerStyleSheet, StyleSheetManager } from 'styled-components';
 
 export default function StyledComponentsRegistry({ children }: { children: React.ReactNode }) {
-    // Only create stylesheet once with lazy initial state
-    // x-ref: https://reactjs.org/docs/hooks-reference.html#lazy-initial-state
     const [styledComponentsStyleSheet] = useState(() => new ServerStyleSheet());
+    const [isMounted, setIsMounted] = useState(false);
 
     useServerInsertedHTML(() => {
         const styles = styledComponentsStyleSheet.getStyleElement();
@@ -18,7 +17,18 @@ export default function StyledComponentsRegistry({ children }: { children: React
         return <>{styles}</>;
     });
 
-    if (typeof window !== 'undefined') return <>{children}</>;
+    useEffect(() => {
+        setIsMounted(true);
 
-    return <StyleSheetManager sheet={styledComponentsStyleSheet.instance}>{children}</StyleSheetManager>;
+        return () => {
+            styledComponentsStyleSheet.seal();
+        };
+    }, [styledComponentsStyleSheet]);
+
+    if (typeof window === 'undefined') {
+        return <StyleSheetManager sheet={styledComponentsStyleSheet.instance}>{children}</StyleSheetManager>;
+    }
+
+    // Renderização no cliente
+    return <>{children}</>;
 }

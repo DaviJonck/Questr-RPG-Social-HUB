@@ -1,182 +1,188 @@
 'use client';
 
-import React from 'react';
+import React, { useState } from 'react';
 
 import { Header } from '../components/Header/Header';
 import { Footer } from '../home/modules/Footer/Footer';
-import { Castle, Check, Coins, Crown, Gem, Heart, Scroll, Shield, Star, Sword, Users, X } from 'lucide-react';
-import styled from 'styled-components';
+import { Castle, Coins, Crown, Gem, Heart, Star, Users } from 'lucide-react';
+import styled, { keyframes } from 'styled-components';
 
-const VIPPlansPage = () => {
+const SupportPage = () => {
+    const [isPouring, setIsPouring] = useState(false);
+
+    const handleSupportClick = () => {
+        setIsPouring(true);
+        // Simula o tempo de "enchimento" antes de redirecionar
+        setTimeout(() => {
+            window.location.href = '/apoia-se';
+        }, 1500);
+    };
+
     return (
         <>
             <Header />
-            <PlansContainer>
-                <PageHeader>
-                    <Crown size={48} />
-                    <h1>APOIE A TAVERNA</h1>
-                    <p>Sua contribuição mantém a taverna aberta para todos os aventureiros</p>
-                </PageHeader>
+            <TavernContainer>
+                <PlansContainer>
+                    <PageHeader>
+                        <Crown size={48} />
+                        <h1>APOIE A TAVERNA</h1>
+                        <p>Sua contribuição mantém a taverna aberta para todos os aventureiros</p>
+                    </PageHeader>
 
-                <PlansGrid>
-                    {/* Plano Básico */}
-                    <PlanCard>
-                        <PlanHeader>
-                            <h2>Aventureiro</h2>
-                            <Price>R$10,00</Price>
-                        </PlanHeader>
-                        <PlanFeatures>
-                            <Feature $valid={true}>
-                                <Check size={16} /> Criação de perfil básico
-                            </Feature>
-                            <Feature $valid={true}>
-                                <Check size={16} /> Acesso a mesas públicas
-                            </Feature>
-                            <Feature $valid={true}>
-                                <Check size={16} /> 3 tags de interesse
-                            </Feature>
-                            <Feature $valid={false}>
-                                <X size={16} /> Badge exclusiva
-                            </Feature>
-                            <Feature $valid={false}>
-                                <X size={16} /> Mesas VIP
-                            </Feature>
-                            <Feature $valid={false}>
-                                <X size={16} /> Recursos avançados
-                            </Feature>
-                        </PlanFeatures>
-                        <PlanButton>Seu Plano Atual</PlanButton>
-                    </PlanCard>
+                    <VIPBenefits>
+                        <h2>Benefícios para apoiadores!</h2>
+                        <BenefitsGrid>
+                            <BenefitCard>
+                                <Gem size={32} />
+                                <h3>Badges Exclusivas</h3>
+                                <p>Mostre seu status com badges especiais no seu perfil</p>
+                            </BenefitCard>
+                            <BenefitCard>
+                                <Users size={32} />
+                                <h3>Comunidade Premium</h3>
+                                <p>Acesso a canais exclusivos da comunidade</p>
+                            </BenefitCard>
+                            <BenefitCard>
+                                <Star size={32} />
+                                <h3>Prioridade no acesso de novas Features</h3>
+                                <p>Você será o primeiro a testar novas features da Taverna</p>
+                            </BenefitCard>
+                        </BenefitsGrid>
+                    </VIPBenefits>
 
-                    {/* Plano Intermediário */}
-                    <PlanCard $highlighted={true}>
-                        <Ribbon>Popular</Ribbon>
-                        <PlanHeader>
-                            <h2>Mestre</h2>
-                            <Price>
-                                R$ 19,90<small>/mês</small>
-                            </Price>
-                        </PlanHeader>
-                        <PlanFeatures>
-                            <Feature $valid={true}>
-                                <Check size={16} /> Todos os recursos do Jogador
-                            </Feature>
-                            <Feature $valid={true}>
-                                <Check size={16} /> Badge de Mestre VIP
-                            </Feature>
-                            <Feature $valid={true}>
-                                <Check size={16} /> Até 10 tags de interesse
-                            </Feature>
-                            <Feature $valid={true}>
-                                <Check size={16} /> Crie mesas VIP
-                            </Feature>
-                            <Feature $valid={true}>
-                                <Check size={16} /> Ferramentas de mestre
-                            </Feature>
-                            <Feature $valid={false}>
-                                <X size={16} /> Suporte prioritário
-                            </Feature>
-                        </PlanFeatures>
-                        <PlanButton $highlighted={true}>Assinar</PlanButton>
-                    </PlanCard>
+                    <BarrelButton onClick={handleSupportClick} $pouring={isPouring} disabled={isPouring}>
+                        {isPouring ? (
+                            <>
+                                <BeerFill />
+                                Enchendo o Barril...
+                            </>
+                        ) : (
+                            'Quero Apoiar'
+                        )}
+                    </BarrelButton>
 
-                    {/* Plano Premium */}
-                    <PlanCard>
-                        <PlanHeader>
-                            <h2>Heroi</h2>
-                            <Price>
-                                R$ 39,90<small>/mês</small>
-                            </Price>
-                        </PlanHeader>
-                        <PlanFeatures>
-                            <Feature $valid={true}>
-                                <Check size={16} /> Todos os recursos do Mestre
-                            </Feature>
-                            <Feature $valid={true}>
-                                <Check size={16} /> Badge exclusiva dourada
-                            </Feature>
-                            <Feature $valid={true}>
-                                <Check size={16} /> Tags ilimitadas
-                            </Feature>
-                            <Feature $valid={true}>
-                                <Check size={16} /> Suporte prioritário 24/7
-                            </Feature>
-                            <Feature $valid={true}>
-                                <Check size={16} /> Acesso antecipado a recursos
-                            </Feature>
-                            <Feature $valid={true}>
-                                <Check size={16} /> Sala privada para campanhas
-                            </Feature>
-                        </PlanFeatures>
-                        <PlanButton>Assinar</PlanButton>
-                    </PlanCard>
-                </PlansGrid>
-
-                <VIPBenefits>
-                    <h2>Benefícios VIP Exclusivos</h2>
-                    <BenefitsGrid>
-                        <BenefitCard>
-                            <Gem size={32} />
-                            <h3>Badges Exclusivas</h3>
-                            <p>Mostre seu status com badges especiais no seu perfil</p>
-                        </BenefitCard>
-                        <BenefitCard>
-                            <Sword size={32} />
-                            <h3>Ferramentas para Mestres</h3>
-                            <p>Gerencie suas campanhas com ferramentas avançadas</p>
-                        </BenefitCard>
-                        <BenefitCard>
-                            <Shield size={32} />
-                            <h3>Mesas VIP</h3>
-                            <p>Acesso a mesas exclusivas com jogadores selecionados</p>
-                        </BenefitCard>
-                        <BenefitCard>
-                            <Scroll size={32} />
-                            <h3>Recursos de Campanha</h3>
-                            <p>Compartilhe materiais e documentos com seus jogadores</p>
-                        </BenefitCard>
-                        <BenefitCard>
-                            <Users size={32} />
-                            <h3>Comunidade Premium</h3>
-                            <p>Acesso a canais exclusivos da comunidade</p>
-                        </BenefitCard>
-                        <BenefitCard>
-                            <Star size={32} />
-                            <h3>Prioridade em Buscas</h3>
-                            <p>Seu perfil aparece primeiro nos resultados de busca</p>
-                        </BenefitCard>
-                    </BenefitsGrid>
-                </VIPBenefits>
-
-                {/* Nova Seção de Apoio */}
-                <CommunitySupport>
-                    <Castle size={48} />
-                    <h2>Ajude a Construir a Taverna</h2>
-                    <SupportText>
-                        <p>
-                            Cada assinatura VIP ajuda diretamente a manter o site ativo e em constante evolução. Nosso
-                            compromisso é oferecer a melhor plataforma para a comunidade de RPG, e seu apoio faz toda a
-                            diferença!
-                        </p>
-                        <ul>
-                            <li>
-                                <Heart size={16} /> Mantenha os servidores online e estáveis
-                            </li>
-                            <li>
-                                <Coins size={16} /> Permita o desenvolvimento de novas ferramentas
-                            </li>
-                            <li>
-                                <Users size={16} /> Ajude uma pequena e apaixonada equipe a melhorar sua experiência
-                            </li>
-                        </ul>
-                        <p>Junte-se aos nossos apoiadores VIP e faça parte dessa jornada épica!</p>
-                    </SupportText>
-                </CommunitySupport>
-            </PlansContainer>
+                    <CommunitySupport>
+                        <Castle size={48} />
+                        <h2>Ajude a Construir a Taverna</h2>
+                        <SupportText>
+                            <p>
+                                Cada apoio ajuda diretamente a manter o site ativo e em constante evolução. Nosso
+                                compromisso é oferecer a melhor plataforma para a comunidade de RPG.
+                            </p>
+                            <ul>
+                                <li>
+                                    <Heart size={16} /> Mantenha os servidores online
+                                </li>
+                                <li>
+                                    <Coins size={16} /> Desenvolva novas ferramentas
+                                </li>
+                                <li>
+                                    <Users size={16} /> Melhore a experiência de todos
+                                </li>
+                            </ul>
+                        </SupportText>
+                    </CommunitySupport>
+                </PlansContainer>
+            </TavernContainer>
             <Footer />
         </>
     );
 };
+
+// Animations
+const flicker = keyframes`
+    0% { opacity: 0.8; }
+    50% { opacity: 1; }
+    100% { opacity: 0.8; }
+`;
+
+const pour = keyframes`
+    0% { height: 0; opacity: 0; }
+    50% { opacity: 1; }
+    100% { height: 100%; opacity: 0; }
+`;
+
+// Styles
+const TavernContainer = styled.div`
+    position: relative;
+    min-height: 100vh;
+    background: #1a1a1a;
+    overflow: hidden;
+`;
+
+const BarrelButton = styled.button<{ $pouring: boolean }>`
+    position: relative;
+    padding: 1.5rem 3rem;
+    margin: 2rem auto;
+    background: linear-gradient(to bottom, #8b4513, #5d2906);
+    color: #ffd700;
+    border: none;
+    border-radius: 50px 50px 30px 30px;
+    font-family: 'Cinzel', serif;
+    font-weight: bold;
+    font-size: 1.2rem;
+    cursor: pointer;
+    overflow: hidden;
+    transition: all 0.3s ease;
+    box-shadow:
+        0 5px 15px rgba(0, 0, 0, 0.3),
+        inset 0 -10px 20px rgba(0, 0, 0, 0.4),
+        inset 0 10px 10px rgba(255, 215, 0, 0.1);
+    z-index: 2;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+
+    &:hover:not(:disabled) {
+        transform: translateY(-3px);
+        box-shadow:
+            0 8px 20px rgba(0, 0, 0, 0.4),
+            inset 0 -10px 20px rgba(0, 0, 0, 0.4),
+            inset 0 10px 10px rgba(255, 215, 0, 0.2);
+    }
+
+    &:disabled {
+        cursor: wait;
+    }
+
+    &::before {
+        content: '';
+        position: absolute;
+        top: 10px;
+        left: 10px;
+        right: 10px;
+        height: 20px;
+        background: linear-gradient(to right, transparent, rgba(255, 215, 0, 0.3), transparent);
+        border-radius: 50%;
+    }
+
+    &::after {
+        content: '';
+        position: absolute;
+        bottom: 5px;
+        left: 50%;
+        transform: translateX(-50%);
+        width: 60%;
+        height: 10px;
+        background: #5d2906;
+        border-radius: 50%;
+    }
+`;
+
+const BeerFill = styled.div`
+    position: absolute;
+    bottom: 5px;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 80%;
+    height: 0;
+    background: linear-gradient(to bottom, transparent, #ffd700, #e6c200);
+    border-radius: 0 0 20px 20px;
+    animation: ${pour} 1.5s ease-out forwards;
+    z-index: -1;
+`;
+
+// Mantenha todos os outros estilos existentes (PlansContainer, PageHeader, etc.) exatamente como estão
 
 // Estilos (mantendo os anteriores e adicionando os novos)
 const CommunitySupport = styled.section`
@@ -198,7 +204,24 @@ const CommunitySupport = styled.section`
         color: #ffd700;
     }
 `;
+const SupportButton = styled.button`
+    padding: 1rem 2rem;
+    background: #ffd700;
+    color: #2a2a2a;
+    border: none;
+    border-radius: 4px;
+    font-weight: bold;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    font-family: 'Cinzel', serif;
+    font-size: 1rem;
+    margin-top: 1rem;
 
+    &:hover {
+        background: #e6c200;
+        transform: translateY(-2px);
+    }
+`;
 const SupportText = styled.div`
     max-width: 800px;
     margin: 0 auto;
@@ -458,4 +481,4 @@ const BenefitCard = styled.div`
     }
 `;
 
-export default VIPPlansPage;
+export default SupportPage;
