@@ -1,39 +1,33 @@
 'use client';
 
-import { useEffect, useState } from 'react';
+import { useState } from 'react';
 
-import Link from 'next/link';
-
+import LogoImg from '@/images/logo1.webp';
 import { SignInButton, SignedIn, SignedOut, UserButton } from '@clerk/nextjs';
 
-import EmptyProfileDropdown from './components/EmptyProfile';
-import ProfileDropdown, { DropdownItem } from './components/ProfileDropdown';
-import { HeaderWrapper, Logo, Nav, NavLink, NavLinkItem, NavLinks } from './styles';
-import { Scroll, Shield } from 'lucide-react';
+import {
+    HeaderWrapper,
+    Logo,
+    MobileMenuButton,
+    MobileMenuIcon,
+    MobileNavLink,
+    MobileNavLinkItem,
+    MobileNavLinks,
+    Nav,
+    NavLink,
+    NavLinkItem,
+    NavLinks
+} from './styles';
+import { Menu, Scroll, Shield, X } from 'lucide-react';
 import { FaSignOutAlt, FaUser } from 'react-icons/fa';
 
-export interface User {
-    user_metadata: {
-        display_name?: string;
-    };
-}
-const DotIcon = () => {
-    return (
-        <svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 512 512' fill='currentColor'>
-            <path d='M256 512A256 256 0 1 0 256 0a256 256 0 1 0 0 512z' />
-        </svg>
-    );
-};
-
-const CustomPage = () => {
-    return (
-        <div>
-            <h1>Custom page</h1>
-            <p>This is the content of the custom page.</p>
-        </div>
-    );
-};
 export function Header() {
+    const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
+
+    const toggleMobileMenu = () => {
+        setIsMobileMenuOpen(!isMobileMenuOpen);
+    };
+
     return (
         <HeaderWrapper>
             <Nav>
@@ -41,49 +35,85 @@ export function Header() {
                     <Shield size={28} />
                     <span>Taverna</span>
                 </Logo>
-                <NavLinks>
-                    <NavLinkItem>
-                        <NavLink href='/'>
-                            <Scroll size={18} /> Início
-                        </NavLink>
-                    </NavLinkItem>
-                    <NavLinkItem>
-                        <NavLink href='/campaigns'>Campanhas</NavLink>
-                    </NavLinkItem>
-                    <NavLinkItem>
-                        <NavLink href='/plans'>Apoie</NavLink>
-                    </NavLinkItem>
-                    <NavLinkItem>
-                        <NavLink href='/create-campaign'>Criar Campanha</NavLink>
-                    </NavLinkItem>
-                    <NavLinkItem>
-                        <NavLink href='/faq'>Faq</NavLink>
-                    </NavLinkItem>
 
-                    <NavLinkItem>
-                        <SignedOut>
-                            <SignInButton mode='modal'>
-                                <DropdownItem>
-                                    <FaSignOutAlt />
-                                    Login
-                                </DropdownItem>
-                            </SignInButton>
-                        </SignedOut>
-                        <SignedIn>
-                            <UserButton>
-                                <UserButton.MenuItems>
-                                    <UserButton.Link label='Perfil' labelIcon={<FaUser />} href='/profile' />
-                                </UserButton.MenuItems>
-                            </UserButton>
-                        </SignedIn>
-                        {/* {user ? (
-                            <ProfileDropdown userName={user.user_metadata.display_name || 'Aventureiro'} />
-                        ) : (
-                            <EmptyProfileDropdown />
-                        )} */}
-                    </NavLinkItem>
+                {/* Menu Desktop */}
+                <NavLinks>
+                    <NavItem href='/' icon={<Scroll size={18} />} text='Início' />
+                    <NavItem href='/campaigns' text='Campanhas' />
+                    <NavItem href='/plans' text='Apoie' />
+                    <NavItem href='/create-campaign' text='Criar Campanha' />
+                    <NavItem href='/faq' text='Faq' />
+                    <AuthButtons />
                 </NavLinks>
+
+                {/* Menu Mobile - Botão */}
+                <MobileMenuButton onClick={toggleMobileMenu}>
+                    <MobileMenuIcon>{isMobileMenuOpen ? <X size={24} /> : <Menu size={24} />}</MobileMenuIcon>
+                </MobileMenuButton>
             </Nav>
+
+            {/* Menu Mobile - Conteúdo */}
+            {isMobileMenuOpen && (
+                <MobileNavLinks>
+                    <NavItem href='/' icon={<Scroll size={18} />} text='Início' mobile />
+                    <NavItem href='/campaigns' text='Campanhas' mobile />
+                    <NavItem href='/plans' text='Apoie' mobile />
+                    <NavItem href='/create-campaign' text='Criar Campanha' mobile />
+                    <NavItem href='/faq' text='Faq' mobile />
+                    <AuthButtons mobile />
+                </MobileNavLinks>
+            )}
         </HeaderWrapper>
+    );
+}
+
+// Componente auxiliar para itens de navegação
+function NavItem({
+    href,
+    icon,
+    text,
+    mobile = false
+}: {
+    href: string;
+    icon?: React.ReactNode;
+    text: string;
+    mobile?: boolean;
+}) {
+    const LinkComponent: React.ElementType = mobile ? MobileNavLinkItem : NavLinkItem;
+    const AnchorComponent = mobile ? MobileNavLink : NavLink;
+
+    return (
+        <LinkComponent>
+            <AnchorComponent href={href}>
+                {icon && icon}
+                {text}
+            </AnchorComponent>
+        </LinkComponent>
+    );
+}
+
+// Componente auxiliar para botões de autenticação
+function AuthButtons({ mobile = false }: { mobile?: boolean }) {
+    const ItemComponent: React.ElementType = mobile ? MobileNavLinkItem : NavLinkItem;
+    const ButtonComponent = mobile ? MobileNavLink : NavLink;
+
+    return (
+        <ItemComponent>
+            <SignedOut>
+                <SignInButton mode='modal'>
+                    <ButtonComponent as='div' style={{ cursor: 'pointer' }}>
+                        <FaSignOutAlt />
+                        Login
+                    </ButtonComponent>
+                </SignInButton>
+            </SignedOut>
+            <SignedIn>
+                <UserButton>
+                    <UserButton.MenuItems>
+                        <UserButton.Link label='Perfil' labelIcon={<FaUser />} href='/profile' />
+                    </UserButton.MenuItems>
+                </UserButton>
+            </SignedIn>
+        </ItemComponent>
     );
 }

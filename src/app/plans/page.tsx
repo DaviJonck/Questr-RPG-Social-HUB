@@ -8,16 +8,6 @@ import { Castle, Coins, Crown, Gem, Heart, Star, Users } from 'lucide-react';
 import styled, { keyframes } from 'styled-components';
 
 const SupportPage = () => {
-    const [isPouring, setIsPouring] = useState(false);
-
-    const handleSupportClick = () => {
-        setIsPouring(true);
-        // Simula o tempo de "enchimento" antes de redirecionar
-        setTimeout(() => {
-            window.location.href = '/apoia-se';
-        }, 1500);
-    };
-
     return (
         <>
             <Header />
@@ -50,16 +40,7 @@ const SupportPage = () => {
                         </BenefitsGrid>
                     </VIPBenefits>
 
-                    <BarrelButton onClick={handleSupportClick} $pouring={isPouring} disabled={isPouring}>
-                        {isPouring ? (
-                            <>
-                                <BeerFill />
-                                Enchendo o Barril...
-                            </>
-                        ) : (
-                            'Quero Apoiar'
-                        )}
-                    </BarrelButton>
+                    <BarrelButton>Quero Apoiar</BarrelButton>
 
                     <CommunitySupport>
                         <Castle size={48} />
@@ -110,7 +91,7 @@ const TavernContainer = styled.div`
     overflow: hidden;
 `;
 
-const BarrelButton = styled.button<{ $pouring: boolean }>`
+const BarrelButton = styled.button`
     position: relative;
     padding: 1.5rem 3rem;
     margin: 2rem auto;
@@ -132,41 +113,6 @@ const BarrelButton = styled.button<{ $pouring: boolean }>`
     display: flex;
     align-items: center;
     gap: 10px;
-
-    &:hover:not(:disabled) {
-        transform: translateY(-3px);
-        box-shadow:
-            0 8px 20px rgba(0, 0, 0, 0.4),
-            inset 0 -10px 20px rgba(0, 0, 0, 0.4),
-            inset 0 10px 10px rgba(255, 215, 0, 0.2);
-    }
-
-    &:disabled {
-        cursor: wait;
-    }
-
-    &::before {
-        content: '';
-        position: absolute;
-        top: 10px;
-        left: 10px;
-        right: 10px;
-        height: 20px;
-        background: linear-gradient(to right, transparent, rgba(255, 215, 0, 0.3), transparent);
-        border-radius: 50%;
-    }
-
-    &::after {
-        content: '';
-        position: absolute;
-        bottom: 5px;
-        left: 50%;
-        transform: translateX(-50%);
-        width: 60%;
-        height: 10px;
-        background: #5d2906;
-        border-radius: 50%;
-    }
 `;
 
 const BeerFill = styled.div`

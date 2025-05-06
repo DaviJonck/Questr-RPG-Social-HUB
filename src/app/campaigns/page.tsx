@@ -15,7 +15,7 @@ import {
     SectionHeader,
     SectionTitle
 } from './style';
-import { Crown, Filter, Plus, Scroll, Sword } from 'lucide-react';
+import { Crown, Filter, Plus, Scroll } from 'lucide-react';
 
 // campaingsMock.ts
 export const mockSponsored = [

@@ -43,6 +43,7 @@ export const Header = styled.div`
     align-items: center;
     margin-bottom: 3rem;
 
+    flex-wrap: wrap;
     h2 {
         font-size: 2.5rem;
         color: ${colors.primary};
